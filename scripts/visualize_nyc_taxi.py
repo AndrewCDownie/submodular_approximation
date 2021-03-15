@@ -25,7 +25,7 @@ def get_total_rides():
 
 
 if __name__ == "__main__":
-    latex = False
+    latex = True
     #plotting and colour set ups
     if latex:
         matplotlib.use("pgf")
@@ -157,7 +157,7 @@ if __name__ == "__main__":
     ax.scatter(hour_starts,lb_n_25, s = s)
     ax.scatter(hour_starts,ub_n_25, s = s)
     ax.scatter(hour_starts,total_rides,s = s)
-    ax.legend(["Classical","Pessimistic","Optimistic","Total Number of Rides"],fontsize = f_size,loc='lower right')
+    ax.legend(["Classical","Pessimistic","Optimistic","Total Rides"],fontsize = f_size,loc='lower right')
     ax.grid(b=True, which='major', color='#999999', alpha=0.2)
     ax.minorticks_on()
     ax.grid(b=True, which='minor', color='#999999', alpha=0.2)
@@ -235,18 +235,18 @@ if __name__ == "__main__":
     ratio_times_ub = [total_average_g_times[i]/total_average_ub_times[i] for i in range(len(average_greedy_times))]
     
     #plot exectution times
-    ax.plot(n_s,total_average_g_times)
     ax.plot(n_s,total_average_lb_times)
     ax.plot(n_s,total_average_ub_times)
+    ax.plot(n_s,total_average_g_times)
 
-    ax.fill_between(n_s,  total_min_g_times,  total_max_g_times,color='blue', alpha=0.1)
-    ax.fill_between(n_s,  total_min_lb_times,  total_max_lb_times,color='pink', alpha=0.1)
-    ax.fill_between(n_s,  total_min_ub_times,  total_max_ub_times,color='cyan', alpha=0.1)
+    ax.fill_between(n_s,  total_min_lb_times,  total_max_lb_times,color='blue', alpha=0.1)
+    ax.fill_between(n_s,  total_min_ub_times,  total_max_ub_times,color='pink', alpha=0.1)
+    ax.fill_between(n_s,  total_min_g_times,  total_max_g_times,color='cyan', alpha=0.1)
     ax.grid(b=True, which='major', color='#999999', alpha=0.2)
     ax.minorticks_on()
     ax.grid(b=True, which='minor', color='#999999', alpha=0.2)
     fig_3.set_size_inches(w=3, h=2.5)
-    plt.legend(["Greedy","Pessimistic","Optimistic"],fontsize=f_size)
+    plt.legend(["Pessimistic","Optimistic","Greedy"],fontsize=f_size)
     ax.set_xlabel(r"$n$")
     ax.set_ylabel("Execution Time (s)")
     plt.savefig("../../Experimental_Data/execution_times.pgf",bbox_inches='tight')
